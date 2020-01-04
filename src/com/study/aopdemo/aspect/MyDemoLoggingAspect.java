@@ -11,7 +11,10 @@ public class MyDemoLoggingAspect {
 	//let's start with @Before advice
 	//add Pointcute expression run this code before target
 	//method:'public void addAccount()'
-	@Before("execution(public void addAccount())") //Match addAccount() method in any class
+//	@Before("execution(public void addAccount())") //Match addAccount() method in any class
+//	@Before("execution(public void com.study.aopdemo.dao.AccountDAO.addAccount())") //Match addAccount() method in AccountDAO class
+	@Before("execution(public void add*())") //Match method starting with "add" in any class
+
 	public void beforeAddAccountAdvice() {
 		System.out.println("\n--------> Executing @Before advice on addAccount()");
 	}
