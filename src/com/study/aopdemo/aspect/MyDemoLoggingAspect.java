@@ -2,11 +2,15 @@ package com.study.aopdemo.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class MyDemoLoggingAspect {
+	
+	@Pointcut("execution(* com.study.aopdemo.dao.*.*(..))")
+	private void forDaoPackage() {}
 	// this si where we add all of our related advices for logging
 	//let's start with @Before advice
 	//add Pointcute expression run this code before target
@@ -15,7 +19,7 @@ public class MyDemoLoggingAspect {
 //	@Before("execution(public void com.study.aopdemo.dao.AccountDAO.addAccount())") //Match addAccount() method in AccountDAO class
 //	@Before("execution(public void add*())") //Match method starting with "add" in any class
 //	@Before("execution(public void addAccount(com.study.aopdemo.Account))") //Match addAccount method with param type is Account
-	@Before("execution(* com.study.aopdemo.dao.*.*(..))") //Match on any methods in a package
+	@Before("forDaoPackage()") //Match on any dmethods in a package
 	public void beforeAddAccountAdvice() {
 		System.out.println("\n--------> Executing @Before advice on addAccount()");
 	}
