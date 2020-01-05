@@ -13,8 +13,9 @@ public class MyDemoLoggingAspect {
 	//method:'public void addAccount()'
 //	@Before("execution(public void addAccount())") //Match addAccount() method in any class
 //	@Before("execution(public void com.study.aopdemo.dao.AccountDAO.addAccount())") //Match addAccount() method in AccountDAO class
-	@Before("execution(public void add*())") //Match method starting with "add" in any class
-
+//	@Before("execution(public void add*())") //Match method starting with "add" in any class
+//	@Before("execution(public void addAccount(com.study.aopdemo.Account))") //Match addAccount method with param type is Account
+	@Before("execution(* com.study.aopdemo.dao.*.*(..))") //Match on any methods in a package
 	public void beforeAddAccountAdvice() {
 		System.out.println("\n--------> Executing @Before advice on addAccount()");
 	}
