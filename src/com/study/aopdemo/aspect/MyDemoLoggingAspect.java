@@ -1,7 +1,9 @@
 package com.study.aopdemo.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +22,14 @@ public class MyDemoLoggingAspect {
 //	@Before("execution(public void add*())") //Match method starting with "add" in any class
 //	@Before("execution(public void addAccount(com.study.aopdemo.Account))") //Match addAccount method with param type is Account
 	@Before("com.study.aopdemo.aspect.StudyAOPExpressions.forDaoPackageNoGetterSetter()") //Match on any dmethods in a package
-	public void beforeAddAccountAdvice() {
+	public void beforeAddAccountAdvice(JoinPoint theJoinPoint) {
 		System.out.println("\n--------> Executing @Before advice on addAccount()");
+		
+		//display the method signature
+		MethodSignature methodSig = (MethodSignature) theJoinPoint.getSignature();
+		System.out.println("Method: "+ methodSig);
+		
+		//display method arguments
 	}
 	
 }
